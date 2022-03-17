@@ -32,10 +32,11 @@ for data_row in  cafe_chesterfield_data:
         cur.execute(product_row_insert_sql)
         
         basket_row_id=cur.fetchone()[0]
-
+        
         basket_transaction_insert_sql = f"""INSERT INTO transaction_basket(transaction_id,basket_item_id)
         VALUES('{transaction_id}','{basket_row_id}')"""
         cur.execute(basket_transaction_insert_sql)
 
 cur.close
 conn.close
+
