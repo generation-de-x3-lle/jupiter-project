@@ -130,3 +130,5 @@ dmypy.json
 
 #Extra Files
 test_conn_postgres.py
+test_file.py
+.gitignore.txt
