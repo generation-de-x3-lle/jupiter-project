@@ -132,3 +132,4 @@ dmypy.json
 test_conn_postgres.py
 test_file.py
 .gitignore.txt
+test_db.py
