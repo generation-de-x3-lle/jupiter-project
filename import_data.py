@@ -1,6 +1,8 @@
 import psycopg2
 from extract_csv import extract_csv
-#Establish the connection, use this when creating the databse first time
+
+#Establish the connection.
+
 conn = psycopg2.connect(
     host="localhost",
     database="cafes_db",
@@ -10,6 +12,11 @@ conn.autocommit = True
 cur = conn.cursor()
 
 cafe_chesterfield_data = extract_csv()
+
+
+if type(cafe_chesterfield_data)==str:
+    print(cafe_chesterfield_data)
+    quit()
 
 for data_row in  cafe_chesterfield_data:
     data_row_insert_sql = f"""INSERT INTO transactions(transaction_date,transaction_time,payment_method,total_purchase,location)
@@ -25,10 +32,11 @@ for data_row in  cafe_chesterfield_data:
         cur.execute(product_row_insert_sql)
         
         basket_row_id=cur.fetchone()[0]
-
+        
         basket_transaction_insert_sql = f"""INSERT INTO transaction_basket(transaction_id,basket_item_id)
         VALUES('{transaction_id}','{basket_row_id}')"""
         cur.execute(basket_transaction_insert_sql)
 
 cur.close
 conn.close
+
