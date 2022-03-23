@@ -109,6 +109,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.jupitervenv
 .env
 
 # Spyder project settings
@@ -130,6 +131,8 @@ dmypy.json
 .pyre/
 
 #Extra Files
+test_conn_postgres.py
+test.py
 
 
 test_conn_postgres.py
@@ -138,4 +141,4 @@ test_file.py
 test_db.py
 extract_csv.py
 import_data.py
-Load_S3.py 
+Load_S3.py
