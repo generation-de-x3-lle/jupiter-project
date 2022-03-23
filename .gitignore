@@ -102,14 +102,18 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-#.env
+.env
 .venv
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+<<<<<<< HEAD
 .jupitervenv
+=======
+.env
+>>>>>>> 87c23259e43a0ab1bd1054ae94c321788ba0bdf9
 
 # Spyder project settings
 .spyderproject
@@ -130,5 +134,14 @@ dmypy.json
 .pyre/
 
 #Extra Files
+<<<<<<< HEAD
 test_conn_postgres.py
 test.py
+=======
+
+
+test_conn_postgres.py
+test_file.py
+.gitignore.txt
+test_db.py
+>>>>>>> 87c23259e43a0ab1bd1054ae94c321788ba0bdf9
