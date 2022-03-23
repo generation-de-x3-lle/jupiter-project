@@ -1,3 +1,4 @@
+cur = conn.cursor()
 #Create Basket table
 create_basket_table = """
 CREATE TABLE basket (
@@ -7,10 +8,12 @@ CREATE TABLE basket (
     primary key(basket_item_id)
     );
 """ 
+cur.execute(create_basket_table)
+conn.commit()
 
 #Create Transaction table, date(year,month,day) 
 create_transaction_table = """
-create tabke if not exists transactions (
+CREATE TABLE transactions (
     transaction_id  int IDENTITY(1,1),
     transaction_date date not null,
     transaction_time time not null,
@@ -20,8 +23,8 @@ create tabke if not exists transactions (
     primary key (transaction_id)
 );
 """
-
-
+cur.execute(create_transaction_table)
+cur.commit()
 
 #Create table Transation_basket table
 
@@ -35,3 +38,7 @@ CREATE TABLE transaction_basket (
     foreign key (basket_item_id) references basket (basket_item_id)
     );
 """ 
+cur.execute(create_transaction_basket_table)
+cur.commit()
+cur.close()
+conn.close()
