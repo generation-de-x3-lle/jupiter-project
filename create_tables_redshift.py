@@ -1,3 +1,21 @@
+#Make the required imports
+import psycopg2
+
+#Make a connection to Redshift
+conn=psycopg2.connect(
+    dbname = 'jupiter',
+    host = '########',
+    port = '###',
+    user = '####',
+    password = '#####')
+
+print('connection successfull')
+print(conn.info)
+cur=conn.cursor()
+
+
+
+
 cur = conn.cursor()
 #Create Basket table
 create_basket_table = """
@@ -24,7 +42,7 @@ CREATE TABLE transactions (
 );
 """
 cur.execute(create_transaction_table)
-cur.commit()
+conn.commit()
 
 #Create table Transation_basket table
 
@@ -39,6 +57,6 @@ CREATE TABLE transaction_basket (
     );
 """ 
 cur.execute(create_transaction_basket_table)
-cur.commit()
+conn.commit()
 cur.close()
 conn.close()
