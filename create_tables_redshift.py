@@ -18,12 +18,9 @@ Query= 'create schema if not exists jupiter;'
 cur.execute(Query)
 conn.commit()
 
-
-
-cur = conn.cursor()
 #Create Basket table
 create_basket_table = """
-CREATE TABLE basket (
+CREATE TABLE jupiter.basket (
     basket_item_id int IDENTITY(1,1),
     item_name VARCHAR (200),
     item_price numeric (9,2),
@@ -35,7 +32,7 @@ conn.commit()
 
 #Create Transaction table, date(year,month,day) 
 create_transaction_table = """
-CREATE TABLE transactions (
+CREATE TABLE jupiter.transactions (
     transaction_id  int IDENTITY(1,1),
     transaction_date date not null,
     transaction_time time not null,
@@ -51,7 +48,7 @@ conn.commit()
 #Create table Transation_basket table
 
 create_transaction_basket_table = """
-CREATE TABLE transaction_basket (
+CREATE TABLE jupiter.transaction_basket (
     basket_id int IDENTITY (1,1),
     transaction_id int,
     basket_item_id int,
