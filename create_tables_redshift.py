@@ -13,6 +13,10 @@ print('connection successfull')
 print(conn.info)
 cur=conn.cursor()
 
+#Make a schema called jupiter in Redshift
+Query= 'create schema if not exists jupiter;'
+cur.execute(Query)
+conn.commit()
 
 
 
