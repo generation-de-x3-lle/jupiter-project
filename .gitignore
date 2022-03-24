@@ -139,6 +139,3 @@ test_conn_postgres.py
 test_file.py
 .gitignore.txt
 test_db.py
-extract_csv.py
-import_data.py
-Load_S3.py
