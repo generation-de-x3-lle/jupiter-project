@@ -139,3 +139,11 @@ test_conn_postgres.py
 test_file.py
 .gitignore.txt
 test_db.py
+s3.getObject.py
+Lambda_trigger.py
+template1-s3-bucket.yaml
+template2-lambda.yaml
+template3-lambda-s3.yaml
+lambda_function.py
+jpt-create-lambda_plus_code-template.yaml
+data-academy-cloudformation-example
