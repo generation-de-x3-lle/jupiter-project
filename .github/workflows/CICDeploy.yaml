@@ -31,7 +31,7 @@ jobs:
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: jupitercloudfdeploy
-          templates: Lambda_function.zip
+          template: Lambda_function.zip
           capabilities: CAPABILITY_IAM
  
         env:
