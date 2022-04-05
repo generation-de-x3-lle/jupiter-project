@@ -1,8 +1,9 @@
-name: 'Deploy jupiter-cloudformation'
+name: 'CICDeploy.yaml'
 
-on: 
+on:
   push:
-    branches: main
+    branches:
+      - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -33,9 +34,6 @@ jobs:
           name: jupiter-cloudformation
           template: template4-lambda-s3.yaml
           capabilities: CAPABILITY_IAM
-#           parameter-overrides:
-#             DeploymentBucket: "jupitercloudfdeploy"
-#             DeploymentPackageKey: "Lambda_function.zip"
             
         env:
           aws-default-region: eu-west-1
