@@ -1,17 +1,12 @@
-name: 'CICDeploy.yaml'
+name: deployment
 
-on: 
-#  push:
-#   branches:
-#    - main
+on:
+  push:
+    branches:
+      - main
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-    inputs:
-      region:
-        description: 'AWS Region to deploy to'
-        required: true
-        default: 'eu-west-1'
+#   # Allows you to run this workflow manually from the Actions tab
+#   workflow_dispatch:
         
 jobs:
   # This workflow contains a single job called "deploy"
