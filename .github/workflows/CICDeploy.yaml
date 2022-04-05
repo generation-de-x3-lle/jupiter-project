@@ -30,12 +30,12 @@ jobs:
       - name: Deploy to AWS CloudFormation
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: jupitercloudfdeploy
+          name: jupiter-cloudformation
           template: template4-lambda-s3.yaml
           capabilities: CAPABILITY_IAM
-#           parameters:
-#             DeploymentBucket: jupiter
-#             DeploymentPackageKey: Lambda_function.zip
+#           parameter-overrides:
+#             DeploymentBucket: "jupitercloudfdeploy"
+#             DeploymentPackageKey: "Lambda_function.zip"
             
         env:
           aws-default-region: eu-west-1
