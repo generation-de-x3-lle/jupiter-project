@@ -37,4 +37,5 @@ jobs:
           name: jupiter-cloudformation-v1
           template: template4-lambda-s3.yaml
           capabilities: CAPABILITY_IAM
+          no-fail-on-empty-changeset: "1"
             
