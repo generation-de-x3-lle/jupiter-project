@@ -62,7 +62,7 @@ create_transaction_basket_table = """
 CREATE TABLE jupiter.transaction_basket (
     basket_id int IDENTITY (1,1),
     transaction_id int,
-    basket_item_id int,
+    product_id int,
     primary key (basket_id),
     foreign key (transaction_id) references jupiter.transactions(transaction_id),
     foreign key (product_id) references jupiter.products (product_id)
