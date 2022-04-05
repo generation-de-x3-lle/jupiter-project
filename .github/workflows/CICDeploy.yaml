@@ -1,13 +1,18 @@
 name: 'CICDeploy.yaml'
 
-on:
-  push:
-    branches:
-      - main
+on: 
+#  push:
+#   branches:
+#    - main
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
+    inputs:
+      region:
+        description: 'AWS Region to deploy to'
+        required: true
+        default: 'eu-west-1'
+        
 jobs:
   # This workflow contains a single job called "deploy"
   deploy:
@@ -31,12 +36,7 @@ jobs:
       - name: Deploy to AWS CloudFormation
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: jupiter-cloudformation
+          name: jupiter-cloudformation-v1
           template: template4-lambda-s3.yaml
           capabilities: CAPABILITY_IAM
             
-        env:
-          aws-default-region: eu-west-1
-          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
