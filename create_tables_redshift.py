@@ -18,18 +18,29 @@ Query= 'create schema if not exists jupiter;'
 cur.execute(Query)
 conn.commit()
 
-#Create Basket table
-create_basket_table = """
-CREATE TABLE jupiter.basket (
-    basket_item_id int IDENTITY(1,1),
-    item_name VARCHAR (200),
-    item_price numeric (9,2),
-    primary key(basket_item_id)
+#Create Basket table, this table has been replaced by products table
+# create_basket_table = """
+# CREATE TABLE jupiter.basket (
+#     basket_item_id int IDENTITY(1,1),
+#     item_name VARCHAR (200),
+#     item_price numeric (9,2),
+#     primary key(basket_item_id)
+#     );
+# """ 
+# cur.execute(create_basket_table)
+# conn.commit()
+
+#Create table Products
+create_product_table = """
+CREATE TABLE jupiter.products (
+    porduct_id int IDENTITY(1,1),
+    product_name VARCHAR (200),
+    product_price numeric (9,2),
+    primary key(product_id)
     );
 """ 
-cur.execute(create_basket_table)
+cur.execute(create_product_table)
 conn.commit()
-
 #Create Transaction table, date(year,month,day) 
 create_transaction_table = """
 CREATE TABLE jupiter.transactions (
