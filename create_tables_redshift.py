@@ -65,7 +65,7 @@ CREATE TABLE jupiter.transaction_basket (
     basket_item_id int,
     primary key (basket_id),
     foreign key (transaction_id) references jupiter.transactions(transaction_id),
-    foreign key (basket_item_id) references jupiter.basket (basket_item_id)
+    foreign key (product_id) references jupiter.products (product_id)
     );
 """ 
 cur.execute(create_transaction_basket_table)
