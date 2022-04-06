@@ -4,8 +4,6 @@ name: 'Deploy jupiter-cloudformation'
 #   push:
 #     branches: [ master ]
 on:
-  label:
-    types: [created, edited]
   push:
     branches:
       - main
@@ -34,19 +32,19 @@ jobs:
           aws-s3bucket: ${{ secrets.S3_BUCKET}}
           aws-region: eu-west-1
 
-      # Deploy to AWS CloudFormation
-      - name: Deploy to AWS CloudFormation
-        uses: aws-actions/aws-cloudformation-github-deploy@v1
-        with:
-          name: jupitercloudfdeploy
-          template: template4-lambda-s3.yaml
-          capabilities: CAPABILITY_IAM
+#       # Deploy to AWS CloudFormation
+#       - name: Deploy to AWS CloudFormation
+#         uses: aws-actions/aws-cloudformation-github-deploy@v1
+#         with:
+#           name: jupitercloudfdeploy
+#           template: template4-lambda-s3.yaml
+#           capabilities: CAPABILITY_IAM
           
-  debug:
-    needs: [deploy]
-    runs-on: windows-latest
-    if: ${{ failure() }}
-    steps:
-      - uses: actions/checkout@v2
-      - run: ./workflows/deployment.yaml
+#   debug:
+#     needs: [deploy]
+#     runs-on: windows-latest
+#     if: ${{ failure() }}
+#     steps:
+#       - uses: actions/checkout@v2
+#       - run: ./
             
