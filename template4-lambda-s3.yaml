@@ -3,15 +3,15 @@ Description: >
   Template to deploy a lambda which is triggered by an S3 event.
 
 Parameters:
-  DeploymentBucket:
+  DeploymentBucket: jupiter
     Type: String
     Description: Enter the name of the S3 bucket where your deployment package is.
-  DeploymentPackageKey: 
+  DeploymentPackageKey: Lambda_function.zip
     Type: String
     Description: Enter the name of the S3 key of your deployment package.
-  BucketName: 
-    Type: String 
-    Description: Enter the name of the bucket you wish to create.
+  # BucketName: 
+  #   Type: String 
+  #   Description: Enter the name of the bucket you wish to create.
 
 Resources:
   LambdaFunctionRole:

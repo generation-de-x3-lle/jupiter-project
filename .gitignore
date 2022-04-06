@@ -146,3 +146,5 @@ template2-lambda.yaml
 template3-lambda-s3.yaml
 jpt-create-lambda_plus_code-template.yaml
 data-academy-cloudformation-example
+CI-CD-template.yaml
+template5.yaml
