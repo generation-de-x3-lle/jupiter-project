@@ -1,13 +1,19 @@
-name: deployment
+name: 'Deploy jupiter-cloudformation'
 
-on: push
+# on: 
 #   push:
-#     branches:
-#       - main
+#     branches: [ master ]
+on:
+  label:
+    types: [created, edited]
+  push:
+    branches:
+      - main
+  
 
 #   # Allows you to run this workflow manually from the Actions tab
 #   workflow_dispatch:
-        
+
 jobs:
   # This workflow contains a single job called "deploy"
   deploy:
@@ -16,7 +22,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout code from main branch
+      - name: Checkout code from master branch
         uses: actions/checkout@v2
 
       # Configure AWS Credential
@@ -24,16 +30,23 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
           aws-region: eu-west-1
-          aws-bucket: ${{ secrets.S3_BUCKET}}
 
       # Deploy to AWS CloudFormation
       - name: Deploy to AWS CloudFormation
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: jupiter-cloudformation-v1
+          name: jupitercloudfdeploy
           template: template4-lambda-s3.yaml
           capabilities: CAPABILITY_IAM
-          no-fail-on-empty-changeset: "1"
+          
+  debug:
+    needs: [deploy]
+    runs-on: windows-latest
+    if: ${{ failure() }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./debug
+      - run: ./
             
