@@ -48,5 +48,5 @@ jobs:
     if: ${{ failure() }}
     steps:
       - uses: actions/checkout@v2
-      - run: ./template4-lambda-s3.yaml
+      - run: ./deployment.yml
             
