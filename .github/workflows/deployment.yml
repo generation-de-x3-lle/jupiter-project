@@ -22,7 +22,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout code from master branch
+      - name: Checkout code from main branch
         uses: actions/checkout@v2
 
       # Configure AWS Credential
@@ -30,7 +30,8 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.ACCESS_KEY_SECRET }}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY}}
+          aws-s3bucket: ${{ secrets.S3_BUCKET}}
           aws-region: eu-west-1
 
       # Deploy to AWS CloudFormation
@@ -47,6 +48,5 @@ jobs:
     if: ${{ failure() }}
     steps:
       - uses: actions/checkout@v2
-      - run: ./debug
-      - run: ./
+      - run: ./template4-lambda-s3.yaml
             
