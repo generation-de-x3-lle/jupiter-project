@@ -1,0 +1,55 @@
+name: 'Deploy jupiter-cloudformation'
+
+on: 
+  push:
+    branches: 
+      - main 
+
+
+jobs:
+  # This workflow contains a single job called "deploy"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code from main branch
+        uses: actions/checkout@v2
+
+      # Configure AWS Credential
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+      
+      # Copy the yaml file to the s3 BUCKET
+      - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --follow-symlinks --delete -exclude '.git*/*'
+      env:
+        AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+
+      
+
+      # Deploy to AWS CloudFormation
+      # - name: Deploy to AWS CloudFormation
+      #   uses: aws-actions/aws-cloudformation-github-deploy@v1
+      #   with:
+      #     name: jupitercloudfdeploy
+      #     template: template4-lambda-s3.yaml
+      #     capabilities: CAPABILITY_IAM
+          
+  # debug:
+  #   needs: [deploy]
+  #   runs-on: windows-latest
+  #   if: ${{ failure() }}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: ./debug
+      
