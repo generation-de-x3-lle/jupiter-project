@@ -1,16 +1,10 @@
 name: 'Deploy jupiter-cloudformation'
 
-# on: 
-#   push:
-#     branches: [ master ]
-on:
+on: 
   push:
-    branches:
-      - main
-  
+    branches: 
+      - main 
 
-#   # Allows you to run this workflow manually from the Actions tab
-#   workflow_dispatch:
 
 jobs:
   # This workflow contains a single job called "deploy"
@@ -28,23 +22,32 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY}}
-          aws-s3bucket: ${{ secrets.S3_BUCKET}}
+          aws-secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
+      
+      # Copy the yaml file to the s3 BUCKET
+      - name: Deploy cloudformation yaml file  to S3 bucket
+        run: aws s3 sync ./tempplate4-lambda-s3.yaml/ s3://deploycloudbucket --delete
+        
+     # copy zip file to s3 Bucket
+      - name: Deploy Lambda function zip file to s3 bucket
+        run: aws s3 sync ./Lambda_function.zip s3://deploycloudbucket --delete      
 
-#       # Deploy to AWS CloudFormation
-#       - name: Deploy to AWS CloudFormation
-#         uses: aws-actions/aws-cloudformation-github-deploy@v1
-#         with:
-#           name: jupitercloudfdeploy
-#           template: template4-lambda-s3.yaml
-#           capabilities: CAPABILITY_IAM
+      
+
+      # Deploy to AWS CloudFormation
+      # - name: Deploy to AWS CloudFormation
+      #   uses: aws-actions/aws-cloudformation-github-deploy@v1
+      #   with:
+      #     name: jupitercloudfdeploy
+      #     template: template4-lambda-s3.yaml
+      #     capabilities: CAPABILITY_IAM
           
-#   debug:
-#     needs: [deploy]
-#     runs-on: windows-latest
-#     if: ${{ failure() }}
-#     steps:
-#       - uses: actions/checkout@v2
-#       - run: ./
+  # debug:
+  #   needs: [deploy]
+  #   runs-on: windows-latest
+  #   if: ${{ failure() }}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: ./debug
             
