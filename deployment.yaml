@@ -26,7 +26,14 @@ jobs:
           aws-region: eu-west-1
       
       # Copy the yaml file to the s3 BUCKET
-      - name:
+      - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --follow-symlinks --delete -exclude '.git*/*'
+      env:
+        AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
 
       
 
@@ -38,11 +45,11 @@ jobs:
       #     template: template4-lambda-s3.yaml
       #     capabilities: CAPABILITY_IAM
           
-  debug:
-    needs: [deploy]
-    runs-on: windows-latest
-    if: ${{ failure() }}
-    steps:
-      - uses: actions/checkout@v2
-      - run: ./debug
+  # debug:
+  #   needs: [deploy]
+  #   runs-on: windows-latest
+  #   if: ${{ failure() }}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: ./debug
       
